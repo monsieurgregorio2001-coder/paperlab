@@ -87,10 +87,12 @@ button { font: inherit; color: var(--text); cursor: pointer; }
 .stage { outline: none; }
 .formula {
   margin: 8px 0 12px; padding: 10px 12px; background: var(--bg); border-radius: 8px; overflow-x: auto;
-  font: 1.05rem/1.9 "Cambria Math", Cambria, Georgia, "Times New Roman", serif; display: flex; flex-wrap: wrap; column-gap: 28px;
+  font: 1.05rem/1.9 "Cambria Math", Cambria, Georgia, "Times New Roman", serif; display: block; white-space: nowrap; letter-spacing: 0; word-spacing: 0;
 }
-.fsep { display: inline-block; flex-basis: 100%; height: 0; }
-.formula sub, .formula sup { font-size: 0.7em; }
+.fsep { display: block; height: 0; }
+.formula sub, .formula sup { font-size: 0.7em; line-height: 0; letter-spacing: 0; position: relative; vertical-align: baseline; }
+.formula sub { top: 0.3em; }
+.formula sup { top: -0.5em; }
 
 .empty { padding: 20px; text-align: center; border: 1px dashed var(--border); border-radius: 10px; background: var(--bg); }
 
