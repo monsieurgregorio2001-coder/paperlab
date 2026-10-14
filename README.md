@@ -44,6 +44,18 @@ flowchart LR
 
 All math lives in `src/lib/transformer.ts` with no DOM or React dependency. Formulas are rendered as styled HTML and Unicode (no KaTeX) to keep the bundle small.
 
+## Run locally
+
+```bash
+npm install
+npm run dev        # development server
+npm test           # unit tests
+npm run build      # type check and production build into dist/
+npm run preview    # serve the build at http://localhost:4173/paperlab/
+```
+
+Works on Node 18 or newer (developed with Node 26). The Vite `base` is `/paperlab/` for GitHub Pages. A deploy workflow is in `.github/workflows/deploy.yml` (not yet run).
+
 ## Tests and measured results
 
 `npm test` runs 19 Vitest tests. They cover softmax rows summing to 1 within 1e-6, attention output shapes, causal masking, positional encoding against the paper formula, layer norm, tokenizer edge cases, and determinism.
