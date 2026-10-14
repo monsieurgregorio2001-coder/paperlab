@@ -1,4 +1,6 @@
+import type { CSSProperties } from 'react'
 import type { Matrix } from '../lib/transformer'
+import { cellVars, shade } from '../lib/ramp'
 
 interface Props {
   title: string
@@ -6,20 +8,19 @@ interface Props {
   rows: Matrix
   rowLabels: string[]
   showNumbers: boolean
-  /** Fixed color scale maximum. Defaults to the largest absolute value in the matrix. */
+  /** Fixed colour scale maximum. Defaults to the largest absolute value in the matrix. */
   scaleMax?: number
   colLabelPrefix?: string
 }
 
-export function cellStyle(v: number, max: number): React.CSSProperties {
-  const m = max > 0 ? Math.min(1, Math.abs(v) / max) : 0
-  const pct = Math.round(m * 85)
-  const base = v >= 0 ? 'var(--pos)' : 'var(--neg)'
-  return { background: `color-mix(in srgb, ${base} ${pct}%, var(--cell-bg))`, color: m > 0.5 ? '#ffffff' : undefined }
+/** Diverging cell: accent for positive, warm for negative, surface at zero. */
+export function cellStyle(v: number, max: number): CSSProperties {
+  const t = max > 0 ? Math.min(1, Math.abs(v) / max) : 0
+  return cellVars(shade(t, v >= 0 ? 'accent' : 'warm')) as CSSProperties
 }
 
 function fmt(v: number): string {
-  return v === -Infinity ? '-∞' : v.toFixed(2)
+  return v === -Infinity ? '−∞' : v.toFixed(2)
 }
 
 export default function MatrixView({ title, caption, rows, rowLabels, showNumbers, scaleMax, colLabelPrefix = 'd' }: Props) {
@@ -45,16 +46,21 @@ export default function MatrixView({ title, caption, rows, rowLabels, showNumber
             {rows.map((row, i) => (
               <tr key={i}>
                 <th scope="row" className="rowh">{rowLabels[i]}</th>
-                {row.map((v, j) => (
-                  <td
-                    key={j}
-                    style={cellStyle(v, max)}
-                    title={`${rowLabels[i]}, ${colLabelPrefix}${j + 1}: ${fmt(v)}`}
-                    aria-label={`${rowLabels[i]}, ${colLabelPrefix}${j + 1}: ${fmt(v)}`}
-                  >
-                    {showNumbers ? fmt(v) : null}
-                  </td>
-                ))}
+                {row.map((v, j) => {
+                  const finite = Number.isFinite(v)
+                  const label = `${rowLabels[i]}, ${colLabelPrefix}${j + 1}: ${fmt(v)}`
+                  return (
+                    <td
+                      key={j}
+                      className={finite ? 'cell' : 'cell masked'}
+                      style={finite ? cellStyle(v, max) : undefined}
+                      title={label}
+                      aria-label={label}
+                    >
+                      {showNumbers || !finite ? fmt(v) : null}
+                    </td>
+                  )
+                })}
               </tr>
             ))}
           </tbody>

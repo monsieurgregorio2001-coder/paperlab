@@ -1,14 +1,24 @@
 # PaperLab
 
-An interactive visualizer that walks through one layer of the Transformer from "Attention Is All You Need" (Vaswani et al., 2017), using real math on a small toy model.
+See attention happen. Type a sentence and step through one layer of the Transformer from "Attention Is All You Need".
 
-> Screenshot placeholder: add `docs/screenshot.png` (step 3, attention heatmap) and reference it here after the first deploy.
+[![PaperLab showing the attention step with two heatmaps](docs/hero.png)](https://monsieurgregorio2001-coder.github.io/paperlab/)
 
-**Toy model: real Transformer math on small random weights. Not a trained model.**
+*Toy model: real Transformer math on small random weights, not a trained model.*
 
-## How it works
+## In 30 seconds
 
-Type a sentence (up to 16 tokens) or pick a preset, then step through four stages with Back, Play, Pause and Next, or with the keyboard (left and right arrows, space).
+- **Problem:** Papers explain attention in equations that few people can picture.
+- **Build:** A React and TypeScript app that runs real attention math on toy weights in the browser, with per-head heatmaps and step controls.
+- **Result:** 19 unit tests on the math, about 58 KB gzipped, and Lighthouse mobile scores of 96 for performance and 100 in the other three.
+
+## Live demo
+
+https://monsieurgregorio2001-coder.github.io/paperlab/ (the GitHub Pages deploy workflow is included but has not run yet).
+
+## Features
+
+Type a sentence (up to 16 tokens) or pick a preset, then step through four stages with Back, Play, Pause and Next, or with the keyboard (left and right arrows step, P plays or pauses, Space activates the focused button).
 
 1. **Tokenization.** A simplified word-level tokenizer (real models use subword BPE). Tokens get ids from a hash.
 2. **Embeddings and positional encoding.** `d_model = 16`. Embeddings come from a seeded hash per token. Positional encoding is the sinusoidal formula from section 3.5 of the paper. The sum is shown.
@@ -34,36 +44,32 @@ flowchart LR
 
 All math lives in `src/lib/transformer.ts` with no DOM or React dependency. Formulas are rendered as styled HTML and Unicode (no KaTeX) to keep the bundle small.
 
-## Run locally
+## Tests and measured results
 
-```bash
-npm install
-npm run dev        # development server
-npm test           # unit tests
-npm run build      # type check and production build into dist/
-npm run preview    # serve the build at http://localhost:4173/paperlab/
-```
+`npm test` runs 19 Vitest tests. They cover softmax rows summing to 1 within 1e-6, attention output shapes, causal masking, positional encoding against the paper formula, layer norm, tokenizer edge cases, and determinism.
 
-Works on Node 18 or newer (developed with Node 26). The Vite `base` is `/paperlab/` for GitHub Pages. A deploy workflow is in `.github/workflows/deploy.yml` (not yet run).
+Measured on the production build served by `vite preview`:
 
-## Test results
+| Measure | Result |
+| --- | --- |
+| Initial JS and CSS, gzipped | 53.5 KB JS plus 4.4 KB CSS, about 58 KB |
+| Fonts (latin subsets, self-hosted) | about 159 KB woff2: Fraunces 67 KB, Inter 48 KB, JetBrains Mono 43 KB |
+| Lighthouse mobile preset | performance 96, accessibility 100, best practices 100, SEO 100 |
+| axe-core, light and dark, all four steps, at 360 and 1280 px | 0 violations, including colour contrast |
+| Horizontal page scroll at 360 px | none on any step |
 
-`npm test`: 19 tests passing in 1 file. They cover softmax rows summing to 1 within 1e-6, attention output shapes, causal masking, positional encoding against the paper formula, layer norm, tokenizer edge cases (empty, punctuation, more than 16 tokens) and determinism.
-
-## Measured
-
-- Initial JS plus CSS, gzipped: 52.1 KB JS + 2.2 KB CSS, about 54 KB total (target under 300 KB).
-- Lighthouse (headless Chrome against `vite preview`, desktop defaults of the CLI): performance 100, accessibility 100, best practices 100, SEO 100.
-- Checked at 360 px wide: no horizontal page scroll. Heatmaps and matrices scroll inside their own container.
+Heatmap text colour is chosen in `src/lib/ramp.ts` so every cell stays at WCAG AA contrast in both themes.
 
 ## Accessibility
 
-Keyboard operable, visible focus rings, ARIA labels, heatmap cells expose values through `title` and `aria-label`, numbers are printed in attention cells so color is never the only cue, and light and dark themes follow `prefers-color-scheme`.
+Keyboard operable with visible focus rings, ARIA labels, and cell values exposed through `title` and `aria-label`. Numbers can be shown in every cell, so colour is never the only cue. The current step is marked by shape, weight, and underline as well as colour. Light and dark themes follow `prefers-color-scheme`, and motion is disabled under `prefers-reduced-motion`.
 
 ## Credits
 
-Inspired by Clement Mihailescu's algorithm visualizers and Two Minute Papers. Not affiliated.
+Type: Fraunces, Inter, and JetBrains Mono through Fontsource, all under the SIL Open Font License. Inspired by Clement Mihailescu's algorithm visualizers and Two Minute Papers. Not affiliated.
 
 Paper: Vaswani et al., "Attention Is All You Need", https://arxiv.org/abs/1706.03762
 
-MIT License, Garfield Greg Lim III, 2026.
+## License
+
+MIT, Garfield Greg Lim III, 2026.

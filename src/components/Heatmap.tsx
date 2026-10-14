@@ -1,4 +1,5 @@
-import { cellStyle } from './MatrixView'
+import type { CSSProperties } from 'react'
+import { cellVars, shade } from '../lib/ramp'
 
 interface Props {
   title: string
@@ -13,13 +14,17 @@ export default function Heatmap({ title, tokens, weights, selected, onSelect }: 
     <figure className="matrix heat">
       <figcaption>
         <strong>{title}</strong>
-        <span className="muted"> Rows are queries. Columns are keys. Each row sums to 1.</span>
+        <span className="muted"> Rows are queries and columns are keys. Each row sums to 1.</span>
       </figcaption>
       <div className="scroll" tabIndex={0} role="region" aria-label={`${title} attention heatmap, scrollable`}>
         <table className="mt numbers">
           <thead>
             <tr>
-              <th scope="col" className="corner"><span className="sr-only">Query token</span></th>
+              <th className="corner" aria-hidden="true" />
+              <th colSpan={tokens.length} className="axis">Key: the token being looked at</th>
+            </tr>
+            <tr>
+              <th scope="col" className="corner axis">Query</th>
               {tokens.map((t, j) => (
                 <th key={j} scope="col" className="colh tokh" title={t}>{t}</th>
               ))}
@@ -42,8 +47,13 @@ export default function Heatmap({ title, tokens, weights, selected, onSelect }: 
                 {row.map((w, j) => {
                   const label = `${tokens[i]} attends to ${tokens[j]}: ${w.toFixed(3)}`
                   return (
-                    <td key={j} tabIndex={-1} style={cellStyle(w, 1)} title={label} aria-label={label}
-                        className={selected === i ? 'selcell' : undefined}>
+                    <td
+                      key={j}
+                      className={selected === i ? 'cell selcell' : 'cell'}
+                      style={cellVars(shade(w)) as CSSProperties}
+                      title={label}
+                      aria-label={label}
+                    >
                       {w.toFixed(2)}
                     </td>
                   )

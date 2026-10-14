@@ -15,23 +15,32 @@ const sub = (s: string) => <sub>{s}</sub>
 const sup = (s: string) => <sup>{s}</sup>
 
 export const PAPER_URL = 'https://arxiv.org/abs/1706.03762'
+export const HUB_URL = 'https://monsieurgregorio2001-coder.github.io/'
+export const REPO_URL = 'https://github.com/monsieurgregorio2001-coder/paperlab'
+
+/** Case-study copy. Measured numbers are filled in from the build and Lighthouse runs. */
+export const CASE = {
+  problem: 'Papers explain attention in equations that few people can picture.',
+  build: 'A React and TypeScript app that runs real attention math on toy weights in the browser, with per-head heatmaps and step controls.',
+  result: '19 unit tests on the math, about 58 KB gzipped, and Lighthouse mobile scores of 96 for performance and 100 in the other three.',
+}
 
 export const STEPS: StepInfo[] = [
   {
     id: 'tokenize',
     short: 'Tokens',
-    title: '1. Tokenization',
+    title: 'Tokenization',
     section: 'Section 3.4, Embeddings and Softmax',
     url: 'https://arxiv.org/pdf/1706.03762#page=5',
     formulaLabel: 'token id equals hash of the token modulo vocabulary size',
     formula: <>id(token) = hash(lowercase(token)) mod 1000</>,
     explain:
-      'The model cannot read letters, so the sentence is first cut into pieces called tokens. Each token gets an integer id that stands in for it from here on.',
+      'The model cannot read letters, so the sentence is cut into pieces called tokens. Each token gets an integer id that stands in for it from here on.',
   },
   {
     id: 'embed',
     short: 'Embeddings',
-    title: '2. Embeddings + positional encoding',
+    title: 'Embeddings and positional encoding',
     section: 'Sections 3.4 and 3.5',
     url: 'https://arxiv.org/pdf/1706.03762#page=6',
     formulaLabel:
@@ -44,12 +53,12 @@ export const STEPS: StepInfo[] = [
       </>
     ),
     explain:
-      'Each token id becomes a list of 16 numbers, called an embedding. Because attention has no sense of order, a wave pattern based on position is added so that the first word looks different from the fifth.',
+      'Each token id becomes a list of 16 numbers called an embedding. Attention has no sense of order, so a position wave is added to make the first word differ from the fifth.',
   },
   {
     id: 'attention',
     short: 'Attention',
-    title: '3. Scaled dot-product attention',
+    title: 'Scaled dot-product attention',
     section: 'Sections 3.2.1 and 3.2.2',
     url: 'https://arxiv.org/pdf/1706.03762#page=4',
     formulaLabel: 'Attention of Q, K, V equals softmax of Q K transpose divided by square root of d k, times V',
@@ -59,12 +68,12 @@ export const STEPS: StepInfo[] = [
       </>
     ),
     explain:
-      'Every token asks a question (its query) and compares it with the label (key) of every other token. The best matches get the largest weights, and the token then blends the values of the words it pays attention to.',
+      'Each token asks a question, called its query, and compares it with the key of every other token. The best matches get the largest weights, and the token blends the values it pays attention to.',
   },
   {
     id: 'ffn',
     short: 'Feed-forward',
-    title: '4. Feed-forward, residual and layer norm',
+    title: 'Feed-forward, residual, and layer norm',
     section: 'Sections 3.1 and 3.3',
     url: 'https://arxiv.org/pdf/1706.03762#page=5',
     formulaLabel: 'FFN of x equals max of zero and x W1 plus b1, times W2 plus b2. Output is LayerNorm of x plus FFN of x.',
@@ -75,7 +84,7 @@ export const STEPS: StepInfo[] = [
       </>
     ),
     explain:
-      'Each token vector then passes alone through a small two-layer network that expands to 32 numbers and shrinks back to 16. The result is added back to the input (a residual connection) and normalized so the numbers stay well behaved.',
+      'Each token vector passes alone through a small network that grows to 32 numbers and shrinks back to 16. The result is added to the input and normalized so the numbers stay well behaved.',
   },
 ]
 
