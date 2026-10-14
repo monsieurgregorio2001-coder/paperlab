@@ -1,0 +1,150 @@
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #171923;
+  --muted: #555b6e;
+  --border: #d5d9e6;
+  --accent: #4338ca;
+  --accent-contrast: #ffffff;
+  --pos: #2563eb;
+  --neg: #d9480f;
+  --cell-bg: #f3f4f8;
+  --sel: #fde68a;
+  --focus: #b45309;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1117;
+    --surface: #181b25;
+    --text: #eceef6;
+    --muted: #a3a9bd;
+    --border: #2f3445;
+    --accent: #a5b4fc;
+    --accent-contrast: #12141c;
+    --pos: #3b82f6;
+    --neg: #fb923c;
+    --cell-bg: #222633;
+    --sel: #78350f;
+    --focus: #fbbf24;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 8px; top: -60px; background: var(--accent); color: var(--accent-contrast); padding: 8px 12px; border-radius: 6px; z-index: 10; }
+.skip:focus { top: 8px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+
+.top { padding: 24px 0 8px; }
+h1 { margin: 0; font-size: 1.9rem; letter-spacing: -0.02em; }
+.sub { margin: 4px 0 12px; color: var(--muted); }
+.toy { margin: 0; padding: 8px 12px; border: 1px dashed var(--border); border-radius: 8px; background: var(--surface); font-size: 0.9rem; }
+.h2 { font-size: 1.15rem; margin: 0 0 8px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin: 16px 0; }
+
+input[type="text"] {
+  width: 100%; font: inherit; padding: 10px 12px; color: var(--text);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+}
+.count { margin: 6px 0 10px; font-size: 0.875rem; color: var(--muted); }
+.count.warn { color: var(--neg); }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+button { font: inherit; color: var(--text); cursor: pointer; }
+.chip-btn, .toggle {
+  padding: 4px 10px; border: 1px solid var(--border); background: var(--bg); border-radius: 999px; font-size: 0.85rem;
+}
+.toggle { padding: 6px 14px; }
+.toggle[aria-pressed="true"] { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+.chip-btn:hover, .toggle:hover { border-color: var(--accent); }
+
+.controls { display: flex; flex-direction: column; gap: 10px; }
+.btns { display: flex; gap: 8px; }
+.btns button {
+  flex: 1; min-height: 44px; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--accent);
+  background: var(--surface); font-weight: 600;
+}
+.btns button[aria-pressed="true"] { background: var(--accent); color: var(--accent-contrast); }
+.btns button:disabled { opacity: 0.45; cursor: not-allowed; border-color: var(--border); }
+.dots { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; flex-wrap: wrap; }
+.dots li { flex: 1 1 70px; }
+.dot { width: 100%; display: flex; gap: 6px; align-items: center; justify-content: center; padding: 6px 4px; border: 1px solid var(--border); background: var(--surface); border-radius: 8px; font-size: 0.8rem; }
+.dot .num { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--cell-bg); font-weight: 700; flex: none; }
+.dot[aria-current="step"] { border-color: var(--accent); box-shadow: inset 0 -3px 0 var(--accent); font-weight: 600; }
+.dot[aria-current="step"] .num { background: var(--accent); color: var(--accent-contrast); }
+.hint { margin: 0; font-size: 0.8rem; }
+
+.stage { outline: none; }
+.formula {
+  margin: 8px 0 12px; padding: 10px 12px; background: var(--bg); border-radius: 8px; overflow-x: auto;
+  font: 1.05rem/1.9 "Cambria Math", Cambria, Georgia, "Times New Roman", serif; display: flex; flex-wrap: wrap; column-gap: 28px;
+}
+.fsep { display: inline-block; flex-basis: 100%; height: 0; }
+.formula sub, .formula sup { font-size: 0.7em; }
+
+.empty { padding: 20px; text-align: center; border: 1px dashed var(--border); border-radius: 10px; background: var(--bg); }
+
+.chips { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tok { display: flex; flex-direction: column; align-items: center; padding: 6px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); }
+.tw { font-weight: 600; font-size: 1.05rem; overflow-wrap: anywhere; }
+.tid { font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.check { display: inline-flex; gap: 8px; align-items: center; margin: 4px 0 8px; font-size: 0.9rem; }
+.check input { width: 18px; height: 18px; }
+.stack { display: flex; flex-direction: column; gap: 8px; }
+.op { text-align: center; font-size: 1.6rem; color: var(--muted); line-height: 1; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.toggles { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.matrix { margin: 8px 0; min-width: 0; max-width: 100%; }
+.matrix figcaption { font-size: 0.9rem; margin-bottom: 4px; }
+.scroll { overflow-x: auto; max-width: 100%; border: 1px solid var(--border); border-radius: 8px; }
+.mt { border-collapse: collapse; font-size: 0.7rem; font-variant-numeric: tabular-nums; }
+.mt td { width: 20px; min-width: 20px; height: 22px; padding: 0; border: 1px solid var(--surface); text-align: center; color: var(--text); }
+.mt.numbers td { min-width: 44px; width: 44px; font-size: 0.72rem; }
+.mt th { font-weight: 500; color: var(--muted); }
+.mt .colh { padding: 2px 3px; font-size: 0.65rem; max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mt .rowh { position: sticky; left: 0; background: var(--surface); text-align: left; padding: 0 8px; white-space: nowrap; max-width: 110px; overflow: hidden; text-overflow: ellipsis; font-size: 0.8rem; color: var(--text); z-index: 1; }
+.mt .corner { position: sticky; left: 0; background: var(--surface); }
+.heat .mt td { min-width: 44px; width: 44px; height: 32px; }
+.heat .tokh { max-width: 44px; }
+.rowbtn { background: none; border: 0; padding: 4px 2px; font-size: 0.8rem; text-align: left; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: underline dotted; }
+.rowbtn[aria-pressed="true"] { font-weight: 700; color: var(--accent); }
+tr.sel .rowh { background: var(--sel); }
+td.selcell { outline: 2px solid var(--focus); outline-offset: -2px; }
+td:hover { outline: 2px solid var(--text); outline-offset: -2px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.8rem; margin-top: 4px; }
+.sw { display: inline-block; width: 16px; height: 16px; border-radius: 3px; border: 1px solid var(--border); }
+.headblock { border-top: 1px solid var(--border); padding-top: 8px; }
+details { margin: 8px 0; }
+summary { cursor: pointer; padding: 6px 0; font-size: 0.9rem; }
+
+.attend { margin: 8px 0; font-size: 0.9rem; }
+.attend p { margin: 0 0 4px; }
+.attend ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.attend li { display: grid; grid-template-columns: minmax(48px, 90px) 1fr 52px; gap: 8px; align-items: center; }
+.an { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar { height: 10px; background: var(--cell-bg); border-radius: 5px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--pos); }
+.av { text-align: right; font-variant-numeric: tabular-nums; }
+
+.foot { padding: 8px 16px 32px; font-size: 0.85rem; color: var(--muted); }
+.foot p { margin: 4px 0; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  .card { padding: 12px; }
+  .dot .dl { display: none; }
+}
