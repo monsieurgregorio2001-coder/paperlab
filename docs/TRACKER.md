@@ -15,10 +15,10 @@ Status values: `todo` · `doing` · `review` · `done` · `later` · `dropped`. 
 ## Phase K — Kernels
 | Item | Status | Notes |
 | --- | --- | --- |
-| Line math + fixtures | todo | |
-| Boundary math + fixtures | todo | |
-| Net (MLP) math + fixtures | todo | |
-| Memory (RNN/LSTM) math + fixtures | todo | |
+| Line math + fixtures | review | `phase-k/kernels`. OLS, GD trace, MSE surface. Fixtures in `tests/fixtures/line.json` from `scripts/fixtures.py`. |
+| Boundary math + fixtures | review | `phase-k/kernels`. Logistic GD trace, perceptron trace, sigmoid sampler, seeded `twoBlobs` and `xor`. |
+| Net (MLP) math + fixtures | review | `phase-k/kernels`. Written from scratch, not derived from TF Playground's `nn.ts`, so no Apache header. L1 dead-weight rule follows the Playground. A test asserts ≥ 60 training steps/s for 2 → 8×4 → 1 on 200 points. |
+| Memory (RNN/LSTM) math + fixtures | review | `phase-k/kernels`. Bracket-depth task; weights trained by `models/memory/train.py` and committed as a tiny exception (see its README). |
 
 ## Phase 1 — Fitting labs
 | Item | Status | Notes |
