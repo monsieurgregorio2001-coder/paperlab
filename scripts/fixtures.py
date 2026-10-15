@@ -343,11 +343,12 @@ class Net:
             g = dW[l] / n
             r = np.sign(self.W[l]) if reg == "l1" else self.W[l] if reg == "l2" else 0.0
             new = self.W[l] - lr * (g + lam * r)
+            was_dead = self.dead[l]
+            new[was_dead] = self.W[l][was_dead]  # dead weights never update
             if reg == "l1":
-                cross = (self.W[l] != 0) & (self.W[l] * new < 0) & ~self.dead[l]
+                cross = (self.W[l] != 0) & (self.W[l] * new < 0) & ~was_dead
                 new[cross] = 0.0
-                self.dead[l] = self.dead[l] | cross
-            new[self.dead[l]] = self.W[l][self.dead[l]]
+                self.dead[l] = was_dead | cross
             self.W[l] = new
             self.b[l] = self.b[l] - lr * db[l] / n
         return losses.mean(), [d / n for d in dW], [d / n for d in db]
