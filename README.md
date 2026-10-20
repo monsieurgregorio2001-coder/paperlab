@@ -14,7 +14,7 @@ See attention happen. Type a sentence and step through one layer of the Transfor
 
 ## Live demo
 
-https://monsieurgregorio2001-coder.github.io/paperlab/ (the GitHub Pages deploy workflow is included but has not run yet).
+https://monsieurgregorio2001-coder.github.io/paperlab/
 
 ## Features
 
@@ -54,7 +54,7 @@ npm run build      # type check and production build into dist/
 npm run preview    # serve the build at http://localhost:4173/paperlab/
 ```
 
-Works on Node 18 or newer (developed with Node 26). The Vite `base` is `/paperlab/` for GitHub Pages. A deploy workflow is in `.github/workflows/deploy.yml` (not yet run).
+Works on Node 18 or newer (developed with Node 26). The Vite `base` is `/paperlab/` for GitHub Pages. The workflow in `.github/workflows/deploy.yml` deploys it to GitHub Pages.
 
 ## Tests and measured results
 
@@ -81,6 +81,10 @@ Keyboard operable with visible focus rings, ARIA labels, and cell values exposed
 Type: Fraunces, Inter, and JetBrains Mono through Fontsource, all under the SIL Open Font License. Inspired by Clement Mihailescu's algorithm visualizers and Two Minute Papers. Not affiliated.
 
 Paper: Vaswani et al., "Attention Is All You Need", https://arxiv.org/abs/1706.03762
+
+## Development conventions
+
+Start with [local project context](docs/CONTEXT.md) and [agent instructions](AGENTS.md). Shared structure, review, and spec practices live in the [portfolio hub repository](https://github.com/monsieurgregorio2001-coder/monsieurgregorio2001-coder.github.io), under CONTRIBUTING.md and docs/portfolio/. Small fixes use a short verification record; material behavior changes use a focused spec.
 
 ## License
 

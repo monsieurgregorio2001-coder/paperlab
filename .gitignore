@@ -2,3 +2,13 @@ node_modules
 dist
 *.log
 .lighthouse
+
+# Local machine and generated files
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local environment (keep example configuration versionable)
+.env
+.env.*
+!.env.example
