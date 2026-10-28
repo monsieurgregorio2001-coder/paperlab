@@ -37,7 +37,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .small { font: var(--h-t-caption); letter-spacing: var(--h-tr-caption); }
 
 /* Shell and app share one grid cell, so the crossfade never moves layout */
-.shell { display: grid; min-height: max(640px, 100svh); } /* tall enough that the footer starts below the fold, so the app mounting never moves anything visible */
+.shell { display: grid; min-height: max(640px, 100svh, var(--stage-h, 0px)); } /* tall enough that the footer starts below the fold, so the app mounting never moves anything visible */
 .shell > * { grid-area: 1 / 1; min-width: 0; }
 #room-hero { transition: opacity var(--h-dur-ui) var(--h-ease-out); align-self: start; }
 #app { opacity: 0; transition: opacity var(--h-dur-ui) var(--h-ease-out); }

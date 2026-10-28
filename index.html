@@ -12,6 +12,7 @@
     <!-- house:boot --><script>(function(){var d=document.documentElement,m;try{m=localStorage.getItem("house.motion")}catch(e){}d.dataset.motion=m=="full"||m=="calm"?m:matchMedia("(prefers-reduced-motion:reduce)").matches?"calm":"full"})()</script><!-- /house:boot -->
     <link rel="preload" href="/house/2.0.1/fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/house/2.0.1/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script>try{var h=sessionStorage.getItem("pl.h:"+location.pathname+location.hash);if(h)document.documentElement.style.setProperty("--stage-h",h+"px")}catch(e){}</script>
     <link rel="expect" href="#room-hero" blocking="render" />
     <!--house-assets-->
     <noscript><style>#app { display: none; }</style></noscript>
