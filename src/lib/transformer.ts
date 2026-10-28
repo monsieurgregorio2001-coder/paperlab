@@ -163,11 +163,14 @@ export function scaledDotProductAttention(
   K: Matrix,
   V: Matrix,
   causal = false,
+  /** Divide scores by sqrt(d_k). Always true in the paper. The Attention room can switch it off to show why. */
+  scale = true,
 ): AttentionResult {
   const dk = Q[0]?.length ?? 1
   const raw = matmul(Q, transpose(K))
+  const div = scale ? Math.sqrt(dk) : 1
   const scores = raw.map((row, i) =>
-    row.map((v, j) => (causal && j > i ? -Infinity : v / Math.sqrt(dk))),
+    row.map((v, j) => (causal && j > i ? -Infinity : v / div)),
   )
   const weights = scores.map(softmax)
   return { Q, K, V, scores, weights, output: matmul(weights, V) }

@@ -4,7 +4,7 @@ See attention happen. Type a sentence and step through one layer of the Transfor
 
 [![PaperLab showing the attention step with two heatmaps](docs/hero.png)](https://monsieurgregorio2001-coder.github.io/paperlab/)
 
-*Toy model: real Transformer math on small random weights, not a trained model.*
+*Toy size. The current room (Attention) uses four hand-set heads on the tested attention kernel. The first version, with random weights, is at `/legacy/`.*
 
 ## In 30 seconds
 
@@ -89,3 +89,7 @@ Start with [local project context](docs/CONTEXT.md) and [agent instructions](AGE
 ## License
 
 MIT, Garfield Greg Lim III, 2026.
+
+## Attention room (v2.0)
+
+URL state: `?q=` sentence, `head=` 1 to 4, `w=` word number, `off=position,scaling`, `mask=on`, `weights=random`. Build needs `HOUSE_DIR` (a checkout of the hub at the pinned house commit). `npm run house:sync` injects the crumb and footer, `npm run house:check` fails on drift. The "Real math" label is compiled in only when `src/lib` tests pass.

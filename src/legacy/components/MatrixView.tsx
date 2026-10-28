@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
-import type { Matrix } from '../lib/transformer'
-import { cellVars, shade } from '../lib/ramp'
+import type { Matrix } from '../../lib/transformer'
+import { cellVars, shade } from '../../lib/ramp'
 
 interface Props {
   title: string

@@ -21,3 +21,7 @@ Use `npm test` and `npm run build`. Review attention controls and changed visual
 ## Standalone checkout
 
 Local facts are usable without sibling repositories. Shared context lives in the [portfolio hub repository](https://github.com/monsieurgregorio2001-coder/monsieurgregorio2001-coder.github.io), under docs/portfolio/. New files may not be committed there yet. Record unavailable context instead of inventing decisions. Update this file only when project facts change.
+
+## Update 2026-10-28 (phase 3a)
+
+The Attention room replaced the first version at `/paperlab/`. The first version lives at `/paperlab/legacy/` (`src/legacy/`). Engine: `src/lib/designed.ts` on `src/lib/transformer.ts`. Recursive face not added (offline): follow-up in ADR 0010.
