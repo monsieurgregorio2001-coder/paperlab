@@ -42,6 +42,7 @@ function houseAssets(): Plugin {
   const tags = [
     '<link rel="stylesheet" href="/house/2.0.1/tokens.css" />',
     '<link rel="stylesheet" href="/house/2.0.1/house.css" />',
+    '<script src="/house/2.0.1/doorway.js"></script>',
     '<script type="module" src="/house/2.0.1/house.js"></script>',
   ].join('\n    ')
   return { name: 'house-assets', transformIndexHtml: { order: 'post', handler: (html: string) => html.replace('<!--house-assets-->', tags) } }
