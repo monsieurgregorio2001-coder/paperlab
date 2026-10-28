@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
+import attentionFixture from '../../tests/fixtures/attention.json'
 import { ALL_ON, DESIGNED_FEATURES, DESIGNED_HEADS, designedEmbedding, designedWeights, runAttention, topTarget } from './designed'
 import { D_K, D_MODEL, N_HEADS, runModel, scaledDotProductAttention, type Matrix } from './transformer'
 import { PRESETS } from '../attention/content'
@@ -147,7 +147,7 @@ describe('random weights mode is the first version engine', () => {
 })
 
 describe('NumPy fixture fidelity at 1e-6', () => {
-  const fx = JSON.parse(readFileSync(new URL('../../tests/fixtures/attention.json', import.meta.url), 'utf8')) as {
+  const fx = attentionFixture as unknown as {
     cases: Array<{ head: number; n: number; causal: boolean; scale: boolean; X: Matrix; Wv: Matrix; Wq: Matrix; Wk: Matrix; scores: (number | null)[][]; weights: Matrix; output: Matrix }>
   }
   it('has cases for every head', () => {

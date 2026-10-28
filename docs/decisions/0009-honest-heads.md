@@ -17,3 +17,6 @@ The audit found a defect: a "designed patterns" idea could be drawn without the 
 
 ## Consequences
 The Position switch shows a real cause: the previous and next heads read position waves, and they stop working without them.
+- The "it / animal" preset is dropped. A toy with hand-set heads cannot resolve a pronoun, so the sentence would promise something the room does not do.
+- The token id copy no longer says the model "cannot read letters". Ids here come from a hash, and the room says a real model looks them up in a learned list.
+- Paper links point to the page of the section they name (3.2.1 is on page 4, 3.2.2 and 3.4 on page 5, 3.5 on page 6).

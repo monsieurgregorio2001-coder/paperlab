@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { cellVars, shade } from '../lib/ramp'
+import { cellVars, shade } from '../../lib/ramp'
 
 interface Props {
   title: string

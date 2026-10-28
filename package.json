@@ -6,10 +6,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && npm run build:404",
     "preview": "vite preview",
     "test": "vitest run",
-    "evidence": "node scripts/evidence.mjs"
+    "evidence": "node scripts/evidence.mjs",
+    "build:404": "node $HOUSE_DIR/house/2.0.0/tools/house-sync.mjs --404 dist/404.html --room paperlab",
+    "house:sync": "node $HOUSE_DIR/house/2.0.0/tools/house-sync.mjs --room paperlab index.html",
+    "house:check": "node $HOUSE_DIR/house/2.0.0/tools/house-sync.mjs --check --room paperlab index.html"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
