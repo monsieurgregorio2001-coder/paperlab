@@ -16,6 +16,12 @@ const run = spawnSync('npx', ['vitest', 'run', '--reporter=json', `--outputFile=
 let report;
 try { report = JSON.parse(readFileSync(out, 'utf8')); } catch { console.error('vitest produced no report'); process.exit(1); }
 const passed = report.numPassedTests, total = report.numTotalTests;
+// The math suite is src/lib (the attention kernel). Tooling tests are counted in their own row.
+const count = (pick) => report.testResults.filter((r) => pick(r.name.replace(/\\/g, '/')))
+  .flatMap((r) => r.assertionResults)
+  .reduce((n, a) => ({ passed: n.passed + (a.status === 'passed'), total: n.total + 1 }), { passed: 0, total: 0 });
+const math = count((n) => n.includes('/src/lib/'));
+const tooling = count((n) => !n.includes('/src/lib/'));
 
 const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]));
 const jsGz = walk(dist).filter((f) => f.endsWith('.js')).reduce((n, f) => n + gzipSync(readFileSync(f)).length, 0);
@@ -31,14 +37,17 @@ const evidence = {
   commit,
   ran_at: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
   runner,
-  tests: [{ id: 'unit', label: 'Unit tests', passed, total, command: 'npx vitest run' }],
+  tests: [
+    { id: 'unit', label: 'Unit tests on the attention math', ...math, command: 'npx vitest run src/lib' },
+    { id: 'tooling', label: 'Tests on the evidence tooling', ...tooling, command: 'npx vitest run scripts' },
+  ],
   evals: [],
   figures: [
-    { id: 'tests', value: total, unit: 'tests', label: 'unit tests in the suite', source: 'npx vitest run' },
+    { id: 'math-tests', value: math.total, unit: 'tests', label: 'unit tests on the attention math', source: 'src/lib/transformer.test.ts' },
     { id: 'js-gz', value: jsGz, unit: 'bytes', label: 'gzipped JavaScript in the production build', source: 'dist/**/*.js' },
   ],
   budgets: [{ id: 'js-gz', limit: JS_GZ_LIMIT, actual: jsGz }],
-  limits: ['Does not train anything.', 'One layer.', 'Hand-set heads, not learned ones.'],
+  limits: ['Does not train anything.', 'One layer.', 'Random weights, not learned ones.'],
 };
 
 const problems = validateEvidence(evidence);
