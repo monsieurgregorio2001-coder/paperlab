@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C0D0F'/%3E%3Cpath d='M8 9h16M8 16h16M8 23h10' stroke='%23FB836D' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
     <!-- house:boot --><script>(function(){var d=document.documentElement,m;try{m=localStorage.getItem("house.motion")}catch(e){}d.dataset.motion=m=="full"||m=="calm"?m:matchMedia("(prefers-reduced-motion:reduce)").matches?"calm":"full"})()</script><!-- /house:boot -->
-    <link rel="preload" href="/house/2.0.0/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/house/2.0.1/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="expect" href="#room-hero" blocking="render" />
     <!--house-assets-->
     <noscript><style>#app { display: none; }</style></noscript>
@@ -29,6 +29,12 @@
     <a class="house-capsule is-ghost" href="mailto:lim.ggreg@outlook.com">Email</a>
     <button type="button" class="house-capsule is-ghost house-menu-btn" popovertarget="house-menu" aria-expanded="false" aria-controls="house-menu">Menu</button>
     <div id="house-menu" class="house-menu" popover>
+  <p class="house-menu-h" id="house-menu-room">PaperLab</p>
+  <ul aria-labelledby="house-menu-room">
+    <li><a href="/paperlab/">Attention</a></li>
+    <li><a href="/paperlab/legacy/">First version</a></li>
+  </ul>
+  
   <p class="house-menu-h" id="house-menu-rooms">Rooms</p>
   <ul aria-labelledby="house-menu-rooms">
     <li><a href="/paperlab/">PaperLab</a></li>
@@ -44,6 +50,7 @@
   </ul>
   <p class="house-menu-h" id="house-menu-out">Elsewhere</p>
   <ul aria-labelledby="house-menu-out">
+    <li class="house-menu-email"><a href="mailto:lim.ggreg@outlook.com">Email</a></li>
     <li><a href="https://www.linkedin.com/in/garfield-lim-8239242a9">LinkedIn</a></li>
     <li><a href="https://github.com/monsieurgregorio2001-coder">GitHub</a></li>
   </ul>
@@ -72,7 +79,7 @@
 <footer class="house-footer" data-house-footer>
   <div class="house-footer-inner">
     <ul class="house-footer-links">
-      <li><a href="/changelog/">House 2.0.0</a></li>
+      <li><a href="/changelog/">House 2.0.1</a></li>
       <li><a href="/colophon/">Colophon</a></li>
       <li><a href="/llms.txt">llms.txt</a></li>
       <li><a href="/index.md" data-house-plain>Plain text</a></li>
@@ -83,7 +90,7 @@
         <span>Calm motion</span> <span class="house-switch-state" data-state>Off</span>
       </button>
     </div>
-    <details class="house-drawer" data-house-receipts data-house-version="2.0.0">
+    <details class="house-drawer" data-house-receipts data-house-version="2.0.1">
       <summary>Live receipts</summary>
       <div class="house-drawer-body">
         <dl class="house-live">
@@ -91,7 +98,7 @@
           <div><dt>Largest paint</dt><dd data-r="lcp">not reported by this browser</dd></div>
           <div><dt>Layout shift</dt><dd data-r="cls">not reported by this browser</dd></div>
           <div><dt>Slowest interaction</dt><dd data-r="inp">not reported by this browser</dd></div>
-          <div><dt>House version</dt><dd data-r="version" data-r-ok>2.0.0</dd></div>
+          <div><dt>House version</dt><dd data-r="version" data-r-ok>2.0.1</dd></div>
           <div><dt>Commit</dt><dd data-r="commit">not reported by this page</dd></div>
           <div><dt>Build date</dt><dd data-r="built">not reported by this page</dd></div>
         </dl>

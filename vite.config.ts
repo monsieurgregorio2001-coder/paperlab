@@ -19,11 +19,11 @@ function headsVerified(): boolean {
   return run.status === 0
 }
 
-/** House plugin: /house/ is external at build and served from HOUSE_DIR in dev (house 2.0.0 tools). */
+/** House plugin: /house/ is external at build and served from HOUSE_DIR in dev (house 2.0.1 tools). */
 async function house(): Promise<Plugin | null> {
   const dir = process.env.HOUSE_DIR
   if (!dir) return null
-  const file = resolve(dir, 'house/2.0.0/tools/vite-plugin.mjs')
+  const file = resolve(dir, 'house/2.0.1/tools/vite-plugin.mjs')
   if (!existsSync(file)) return null
   const mod = await import(pathToFileURL(file).href)
   return mod.default({ houseDir: dir }) as Plugin
@@ -36,13 +36,13 @@ function shellLabel(text: string): Plugin {
 
 /**
  * House assets are same-origin files that Vite must not bundle. A late transform adds them after Vite has read the page,
- * because Vite would otherwise turn them into imports. Pinned to house 2.0.0 by house.lock.json.
+ * because Vite would otherwise turn them into imports. Pinned to house 2.0.1 by house.lock.json.
  */
 function houseAssets(): Plugin {
   const tags = [
-    '<link rel="stylesheet" href="/house/2.0.0/tokens.css" />',
-    '<link rel="stylesheet" href="/house/2.0.0/house.css" />',
-    '<script type="module" src="/house/2.0.0/house.js"></script>',
+    '<link rel="stylesheet" href="/house/2.0.1/tokens.css" />',
+    '<link rel="stylesheet" href="/house/2.0.1/house.css" />',
+    '<script type="module" src="/house/2.0.1/house.js"></script>',
   ].join('\n    ')
   return { name: 'house-assets', transformIndexHtml: { order: 'post', handler: (html: string) => html.replace('<!--house-assets-->', tags) } }
 }
