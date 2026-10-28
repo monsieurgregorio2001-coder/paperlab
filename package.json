@@ -10,9 +10,9 @@
     "preview": "vite preview",
     "test": "vitest run",
     "evidence": "node scripts/evidence.mjs",
-    "build:404": "node $HOUSE_DIR/house/2.0.0/tools/house-sync.mjs --404 dist/404.html --room paperlab",
-    "house:sync": "node $HOUSE_DIR/house/2.0.0/tools/house-sync.mjs --room paperlab index.html",
-    "house:check": "node $HOUSE_DIR/house/2.0.0/tools/house-sync.mjs --check --room paperlab index.html"
+    "build:404": "node $HOUSE_DIR/house/2.0.1/tools/house-sync.mjs --404 dist/404.html --room paperlab",
+    "house:sync": "node $HOUSE_DIR/house/2.0.1/tools/house-sync.mjs --room paperlab index.html",
+    "house:check": "node $HOUSE_DIR/house/2.0.1/tools/house-sync.mjs --check --room paperlab index.html"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
