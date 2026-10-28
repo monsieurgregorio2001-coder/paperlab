@@ -59,6 +59,7 @@ h1 { margin: var(--h-sp-3) 0 var(--h-sp-2); font: var(--h-t-title); letter-spaci
 .field-label, .small-h { display: block; margin: 0 0 var(--h-sp-2); font: var(--h-t-label); color: var(--room-muted); }
 .small-h { font-size: 14px; }
 input[type="text"] {
+  box-sizing: border-box;
   width: 100%; min-height: var(--h-target); padding: 0 var(--h-sp-4); border: 1px solid var(--room-rule); border-radius: var(--h-r-sm);
   background: var(--room-surface); color: var(--room-fg); font: 500 17px / 1.2 var(--room-font);
 }

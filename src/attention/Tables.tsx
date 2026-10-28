@@ -32,7 +32,7 @@ export function NumTable({ title, note, rows, rowLabels, colLabels, heat }: Tabl
               <tr key={i}>
                 <th scope="row">{rowLabels[i]}</th>
                 {r.map((v, j) => (
-                  <td key={j} style={heat ? ({ '--heat': `${Math.round(Math.max(0, v) * 70)}%` } as CSSProperties) : undefined} className={heat ? 'heat' : undefined}>
+                  <td key={j} style={heat ? ({ '--heat': `${Math.round(Math.max(0, v) * 40)}%` } as CSSProperties) : undefined} className={heat ? 'heat' : undefined}>
                     {fmt(v)}
                   </td>
                 ))}
